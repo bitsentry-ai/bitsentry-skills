@@ -1,10 +1,10 @@
 ---
-name: bitsentry-backend-spec-writer
+name: backend-spec-writer
 description: Comprehensive skill for writing technical design specifications with support for diverse architectural patterns. Use this skill when creating engineering specs, technical documentation, system design documents, API specifications, database schemas, or architectural documentation. Supports multiple architecture styles including Clean Architecture, DDD/Hexagonal, Microservices, Event Sourcing, Document-Oriented, Service-Oriented, and Modular Monolith patterns. Includes templates for review/approval tables, state machines, sequence diagrams, database schemas (dbdiagram.io and SQL), REST APIs, and implementation guidelines tailored to your chosen architecture.
 license: Apache 2.0 (see LICENSE.txt)
 ---
 
-# BitSentry Backend Spec Writer
+# Backend Spec Writer
 
 This skill provides comprehensive guidance and tools for writing professional technical design specifications, with support for diverse architectural patterns suited to different problem domains.
 
