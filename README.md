@@ -1,7 +1,12 @@
-# Skills
-Skills are folders of instructions, scripts, and resources that Claude loads dynamically to improve performance on specialized tasks. Skills teach Claude how to complete specific tasks in a repeatable way, whether that's creating documents with your company's brand guidelines, analyzing data using your organization's specific workflows, or automating personal tasks.
+# BitSentry Skills Repository
 
-For more information, check out:
+This repository contains **skills for BitSentry** to standardize development practices using Claude Code. It includes both **BitSentry-specific skills** tailored to our engineering workflows and **Anthropic's default example skills** that demonstrate general capabilities.
+
+Skills are folders of instructions, scripts, and resources that Claude loads dynamically to improve performance on specialized tasks. They help standardize how we write specs, tests, and architecture using Claude.
+
+**Website:** [bitsentry.ai](https://bitsentry.ai)
+
+For more information about skills, check out:
 - [What are skills?](https://support.claude.com/en/articles/12512176-what-are-skills)
 - [Using skills in Claude](https://support.claude.com/en/articles/12512180-using-skills-in-claude)
 - [How to create custom skills](https://support.claude.com/en/articles/12512198-creating-custom-skills)
@@ -9,19 +14,61 @@ For more information, check out:
 
 # About This Repository
 
-This repository contains example skills that demonstrate what's possible with Claude's skills system. These examples range from creative applications (art, music, design) to technical tasks (testing web apps, MCP server generation) to enterprise workflows (communications, branding, etc.).
+This is a **fork of Anthropic's skills repository**, customized for BitSentry's development workflows. It contains:
 
-Each skill is self-contained in its own directory with a `SKILL.md` file containing the instructions and metadata that Claude uses. Browse through these examples to get inspiration for your own skills or to understand different patterns and approaches.
+1. **BitSentry-specific skills** - Custom skills for our engineering practices
+2. **Anthropic's example skills** - Reference implementations for inspiration
 
-The example skills in this repo are open source (Apache 2.0). We've also included the document creation & editing skills that power [Claude's document capabilities](https://www.anthropic.com/news/create-files) under the hood in the [`document-skills/`](./document-skills/) folder. These are source-available, not open source, but we wanted to share these with developers as a reference for more complex skills that are actively used in a production AI application.
+Each skill is self-contained in its own directory with a `SKILL.md` file containing the instructions and metadata that Claude uses. The example skills from Anthropic are open source (Apache 2.0). BitSentry-specific skills are internal tools for our team.
 
-**Note:** These are reference examples for inspiration and learning. They showcase general-purpose capabilities rather than organization-specific workflows or sensitive content.
+**Note:** Anthropic's example skills are reference examples for inspiration and learning. They showcase general-purpose capabilities rather than organization-specific workflows.
 
 ## Disclaimer
 
 **These skills are provided for demonstration and educational purposes only.** While some of these capabilities may be available in Claude, the implementations and behaviors you receive from Claude may differ from what is shown in these examples. These examples are meant to illustrate patterns and possibilities. Always test skills thoroughly in your own environment before relying on them for critical tasks.
 
-# Example Skills
+# BitSentry Skills
+
+Skills specifically designed for BitSentry's engineering workflows and development practices.
+
+## Installing BitSentry Skills
+
+You can install BitSentry skills using one of these methods:
+
+### Method 1: Direct Download (All Claude Interfaces)
+
+Download the `.skill` file and upload it via Claude's skills interface:
+
+```bash
+# BitSentry Backend Spec Writer
+curl -L https://raw.githubusercontent.com/bitsentry-ai/bitsentry-skills/main/bitsentry-backend-spec-writer/bitsentry-backend-spec-writer.skill -o bitsentry-backend-spec-writer.skill
+```
+
+Then upload the downloaded `.skill` file to Claude via the skills interface.
+
+### Method 2: Manual Installation (Claude Code)
+
+For Claude Code users, you can manually install skills by placing them in the `~/.claude/skills/` directory:
+
+```bash
+# Create skills directory if it doesn't exist
+mkdir -p ~/.claude/skills
+
+# Download and extract bitsentry-backend-spec-writer
+curl -L https://raw.githubusercontent.com/bitsentry-ai/bitsentry-skills/main/bitsentry-backend-spec-writer/bitsentry-backend-spec-writer.skill -o /tmp/bitsentry-backend-spec-writer.skill
+unzip /tmp/bitsentry-backend-spec-writer.skill -d ~/.claude/skills/
+
+# Clean up temporary files
+rm /tmp/*.skill
+```
+
+After installation, restart Claude Code to load the new skills. They will be automatically available in your Claude Code sessions.
+
+### Available BitSentry Skills
+
+- **bitsentry-backend-spec-writer** - Write comprehensive backend engineering design specs following DDD and hexagonal architecture patterns
+
+# Anthropic Example Skills
 
 This repository includes a diverse collection of example skills demonstrating different capabilities:
 
@@ -55,37 +102,31 @@ The `document-skills/` subdirectory contains skills that Anthropic developed to 
 
 **Important Disclaimer:** These document skills are point-in-time snapshots and are not actively maintained or updated. Versions of these skills ship pre-included with Claude. They are primarily intended as reference examples to illustrate how Anthropic approaches developing more complex skills that work with binary file formats and document structures.
 
-# Try in Claude Code, Claude.ai, and the API
+# Using These Skills
 
-## Claude Code
-You can register this repository as a Claude Code Plugin marketplace by running the following command in Claude Code:
+## For BitSentry Team Members
+
+### Claude Code
+For **BitSentry-specific skills**, download the skill files using the curl commands above, then upload them to Claude Code via the skills interface.
+
+For **Anthropic's example skills**, you can register the original Anthropic repository as a Claude Code Plugin marketplace:
 ```
 /plugin marketplace add anthropics/skills
-```
-
-Then, to install a specific set of skills:
-1. Select `Browse and install plugins`
-2. Select `anthropic-agent-skills`
-3. Select `document-skills` or `example-skills`
-4. Select `Install now`
-
-Alternatively, directly install either Plugin via:
-```
 /plugin install document-skills@anthropic-agent-skills
 /plugin install example-skills@anthropic-agent-skills
 ```
 
-After installing the plugin, you can use the skill by just mentioning it. For instance, if you install the `document-skills` plugin from the marketplace, you can ask Claude Code to do something like: "Use the PDF skill to extract the form fields from path/to/some-file.pdf"
+After installing a skill, you can use it by mentioning it. For example: "Use the bitsentry-backend-spec-writer skill to create a new engineering spec for the authentication system."
 
-## Claude.ai
+### Claude.ai
 
-These example skills are all already available to paid plans in Claude.ai. 
+**Anthropic's example skills** are already available to paid plans in Claude.ai.
 
-To use any skill from this repository or upload custom skills, follow the instructions in [Using skills in Claude](https://support.claude.com/en/articles/12512180-using-skills-in-claude#h_a4222fa77b).
+For **BitSentry-specific skills**, download them using the curl commands above, then follow the instructions in [Using skills in Claude](https://support.claude.com/en/articles/12512180-using-skills-in-claude#h_a4222fa77b) to upload custom skills.
 
-## Claude API
+### Claude API
 
-You can use Anthropic's pre-built skills, and upload custom skills, via the Claude API. See the [Skills API Quickstart](https://docs.claude.com/en/api/skills-guide#creating-a-skill) for more.
+You can upload BitSentry's custom skills via the Claude API. See the [Skills API Quickstart](https://docs.claude.com/en/api/skills-guide#creating-a-skill) for more information.
 
 # Creating a Basic Skill
 
